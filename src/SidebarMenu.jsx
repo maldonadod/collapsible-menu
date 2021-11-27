@@ -51,7 +51,7 @@ function SubMenu({ onClick, className, label, icon }) {
       <div className="label-container">
         <span>{label}</span>
       </div>
-      <span class="chevron bottom"></span>
+      <span className="chevron bottom"></span>
     </li>
   );
 }
