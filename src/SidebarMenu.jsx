@@ -13,54 +13,56 @@ export default function SidebarMenu() {
   return (
     <div className="menu-container">
       <ul className="menu">
-        <li
+        <SubMenu
+          icon={<SafetyOutlined />}
+          label="Roles y Operadores"
           onClick={() => setActive("roles-and-operators")}
           className={
             active("roles-and-operators") ? "menu-item active" : "menu-item"
           }
-        >
-          <div className="icon-container">
-            <SafetyOutlined />
-          </div>
-          <div className="label-container">
-            <span>Roles y Operadores</span>
-          </div>
-        </li>
-        <li
+        />
+        <MenuItem
+          label="Usuarios"
+          icon={<UserOutlined />}
           onClick={() => setActive("users")}
           className={active("users") ? "menu-item active" : "menu-item"}
-        >
-          <div className="icon-container">
-            <UserOutlined />
-          </div>
-          <div className="label-container">
-            <span>Usuarios</span>
-          </div>
-        </li>
-        <li
+        />
+        <MenuItem
+          label="Identity"
+          icon={<IdcardOutlined />}
           onClick={() => setActive("identity")}
           className={active("identity") ? "menu-item active" : "menu-item"}
-        >
-          <div className="icon-container">
-            <IdcardOutlined />
-          </div>
-          <div className="label-container">
-            <span>Identity</span>
-          </div>
-        </li>
-        <li
-          onClick={() => setActive("core-fintech")}
+        />
+        <SubMenu
+          icon={<BankOutlined />}
+          label="Core Fintech"
           className={active("core-fintech") ? "menu-item active" : "menu-item"}
-        >
-          <div className="icon-container">
-            <BankOutlined />
-          </div>
-          <div className="label-container">
-            <span>Core Fintech</span>
-          </div>
-          <span class="chevron bottom"></span>
-        </li>
+          onClick={() => setActive("core-fintech")}
+        />
       </ul>
     </div>
+  );
+}
+
+function SubMenu({ onClick, className, label, icon }) {
+  return (
+    <li onClick={onClick} className={className}>
+      <div className="icon-container">{icon}</div>
+      <div className="label-container">
+        <span>{label}</span>
+      </div>
+      <span class="chevron bottom"></span>
+    </li>
+  );
+}
+
+function MenuItem({ onClick, className, label, icon }) {
+  return (
+    <li onClick={onClick} className={className}>
+      <div className="icon-container">{icon}</div>
+      <div className="label-container">
+        <span>{label}</span>
+      </div>
+    </li>
   );
 }
