@@ -17,6 +17,7 @@
   padding: 13px 0px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .menu-item.active {
   background: #e6f7ff;
@@ -38,5 +39,15 @@
   transition: opacity 0.3s;
 }
 .menu:hover .label-container {
+  opacity: 1;
+}
+.chevron {
+  opacity: 0;
+  position: absolute;
+  right: 24px;
+  top: 16px;
+  font-size: 12px;
+}
+.menu:hover .chevron {
   opacity: 1;
 }

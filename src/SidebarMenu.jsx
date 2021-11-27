@@ -58,6 +58,7 @@ export default function SidebarMenu() {
           <div className="label-container">
             <span>Core Fintech</span>
           </div>
+          <span class="chevron bottom"></span>
         </li>
       </ul>
     </div>
