@@ -27,16 +27,19 @@
   background: #e6f7ff;
   color: #1890ff;
 }
-.menu-item > .icon-container {
+.menu-item .icon-container {
   max-width: 80px;
   width: 80px;
   display: flex;
   justify-content: center;
 }
-.menu-item > .label-container {
+.menu-item .label-container {
   margin-left: -20px;
   opacity: 0;
   transition: opacity 0.3s;
+}
+.menu-item .hidden {
+  display: none;
 }
 .menu:hover .label-container {
   opacity: 1;

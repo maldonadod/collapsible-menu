@@ -45,13 +45,44 @@ export default function SidebarMenu() {
 }
 
 function SubMenu({ onClick, className, label, icon }) {
+  const [clicked, setClicked] = React.useState(false);
+  function myClick() {
+    onClick();
+    setClicked((a) => !a);
+  }
   return (
-    <li onClick={onClick} className={className}>
-      <div className="icon-container">{icon}</div>
-      <div className="label-container">
-        <span>{label}</span>
+    <li
+      onClick={myClick}
+      className={className}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "baseline",
+      }}
+    >
+      <div style={{ display: "flex" }}>
+        <div className="icon-container">{icon}</div>
+        <div className="label-container">
+          <span>{label}</span>
+        </div>
+        <span className="chevron bottom"></span>
       </div>
-      <span className="chevron bottom"></span>
+      <div>
+        <ul>
+          <MenuItem
+            label="Identity"
+            icon={<IdcardOutlined />}
+            onClick={() => console.log(`setActive("identity")`)}
+            className={clicked ? "menu-item" : "menu-item hidden"}
+          />
+          <MenuItem
+            label="Identity"
+            icon={<IdcardOutlined />}
+            onClick={() => console.log(`setActive("identity")`)}
+            className={clicked ? "menu-item" : "menu-item hidden"}
+          />
+        </ul>
+      </div>
     </li>
   );
 }
