@@ -8,6 +8,72 @@ import {
 } from "@ant-design/icons";
 import "./Menu.css";
 
+const menuItems = [
+  {
+    name: "roles-and-operators",
+    label: "Roles y Operadores",
+    icon: <SafetyOutlined />,
+    subitems: [
+      {
+        name: "roles",
+        label: "Roles",
+      },
+      {
+        name: "operators",
+        label: "Operadores",
+      },
+    ],
+  },
+  {
+    name: "users",
+    label: "Usuarios",
+    icon: <UserOutlined />,
+  },
+  {
+    name: "identity",
+    label: "Identity",
+    icon: <IdcardOutlined />,
+  },
+  {
+    name: "core-fintech",
+    label: "Core Fintech",
+    icon: <BankOutlined />,
+    subitems: [
+      {
+        name: "accounts",
+        label: "Cuentas",
+      },
+      {
+        name: "transactions",
+        label: "Transacciones",
+      },
+    ],
+  },
+  {
+    name: "cards",
+    label: "Tarjetas",
+    icon: <CreditCardOutlined />,
+    subitems: [
+      {
+        name: "cards-issued",
+        label: "Tarjetas emitidas",
+      },
+      {
+        name: "delivery",
+        label: "Delivery",
+      },
+      {
+        name: "card-batch",
+        label: "Envio de lotes",
+      },
+      {
+        name: "transactions",
+        label: "Transacciones",
+      },
+    ],
+  },
+];
+
 function useCollapsed() {
   const [collapsed, setCollapsed] = React.useState(true);
   const [isMouseOverMenu, setIsMouseOverMenu] = React.useState(false);
@@ -61,72 +127,6 @@ export default function SidebarMenu() {
     }
   }, [collapsed]);
 
-  const menuItems = [
-    {
-      name: "roles-and-operators",
-      label: "Roles y Operadores",
-      icon: <SafetyOutlined />,
-      subitems: [
-        {
-          name: "roles",
-          label: "Roles",
-        },
-        {
-          name: "operators",
-          label: "Operadores",
-        },
-      ],
-    },
-    {
-      name: "users",
-      label: "Usuarios",
-      icon: <UserOutlined />,
-    },
-    {
-      name: "identity",
-      label: "Identity",
-      icon: <IdcardOutlined />,
-    },
-    {
-      name: "core-fintech",
-      label: "Core Fintech",
-      icon: <BankOutlined />,
-      subitems: [
-        {
-          name: "accounts",
-          label: "Cuentas",
-        },
-        {
-          name: "transactions",
-          label: "Transacciones",
-        },
-      ],
-    },
-    {
-      name: "cards",
-      label: "Tarjetas",
-      icon: <CreditCardOutlined />,
-      subitems: [
-        {
-          name: "cards-issued",
-          label: "Tarjetas emitidas",
-        },
-        {
-          name: "delivery",
-          label: "Delivery",
-        },
-        {
-          name: "card-batch",
-          label: "Envio de lotes",
-        },
-        {
-          name: "transactions",
-          label: "Transacciones",
-        },
-      ],
-    },
-  ];
-
   return (
     <div
       className="menu-container"
@@ -157,32 +157,6 @@ export default function SidebarMenu() {
             );
           }
         })}
-        {/* <SubMenu
-          isOpen={isClicked("roles-and-operators")}
-          icon={<SafetyOutlined />}
-          label="Roles y Operadores"
-          onClick={() => handleClickOnMenuItem("roles-and-operators")}
-          className={getMenuItemClassName("roles-and-operators")}
-        />
-        <MenuItem
-          label="Usuarios"
-          icon={<UserOutlined />}
-          onClick={() => handleClickOnMenuItem("users")}
-          className={getMenuItemClassName("users")}
-        />
-        <MenuItem
-          label="Identity"
-          icon={<IdcardOutlined />}
-          onClick={() => handleClickOnMenuItem("identity")}
-          className={getMenuItemClassName("identity")}
-        />
-        <SubMenu
-          isOpen={isClicked("core-fintech")}
-          icon={<BankOutlined />}
-          label="Core Fintech"
-          className={getMenuItemClassName("core-fintech")}
-          onClick={() => handleClickOnMenuItem("core-fintech")}
-        /> */}
       </ul>
     </div>
   );
@@ -225,18 +199,6 @@ function SubMenu({
           />
         );
       })}
-      {/* <MenuItem
-        label="Identity"
-        icon={null}
-        onClick={() => console.log(`setActive("identity")`)}
-        className="menu-item"
-      />
-      <MenuItem
-        label="Identity"
-        icon={null}
-        onClick={() => console.log(`setActive("identity")`)}
-        className="menu-item"
-      /> */}
     </div>
   );
 }
