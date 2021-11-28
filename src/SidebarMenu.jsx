@@ -7,53 +7,101 @@ import {
 } from "@ant-design/icons";
 import "./Menu.css";
 
+function useCollapsed() {
+  const [collapsed, setCollapsed] = React.useState(true);
+  const [isMouseOverMenu, setIsMouseOverMenu] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setCollapsed(!isMouseOverMenu);
+    }, 500);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isMouseOverMenu]);
+
+  return {
+    collapsed,
+    setIsMouseOverMenu,
+  };
+}
+
 export default function SidebarMenu() {
-  const [activeItem, setActive] = React.useState();
+  const [clickedItems, setClicked] = React.useState([]);
+  const [activeItem, setActiveState] = React.useState();
+  const { collapsed, setIsMouseOverMenu } = useCollapsed();
   const active = (itemName) => itemName === activeItem;
+  const onMouseLeave = () => setIsMouseOverMenu(false);
+  const onMouseOver = () => setIsMouseOverMenu(true);
+  const handleClickOnMenuItem = (menuItemName) => {
+    addClicked(menuItemName);
+    !collapsed && setActiveState(menuItemName);
+  };
+  const addClicked = (menuItemName) => {
+    !collapsed &&
+      setClicked((clickeds) => {
+        if (isClicked(menuItemName)) {
+          return clickeds.filter(
+            (clickedMenuItem) => clickedMenuItem !== menuItemName
+          );
+        }
+        return [...clickeds, menuItemName];
+      });
+  };
+  const isClicked = (menuItemName) => {
+    return clickedItems.includes(menuItemName);
+  };
+  const getMenuItemClassName = (menuItemName) => {
+    return active(menuItemName) ? "menu-item active" : "menu-item";
+  };
+  React.useEffect(() => {
+    if (collapsed) {
+      setClicked([]);
+    }
+  }, [collapsed]);
   return (
-    <div className="menu-container">
+    <div
+      className="menu-container"
+      onMouseLeave={onMouseLeave}
+      onMouseOver={onMouseOver}
+    >
       <ul className="menu">
         <SubMenu
+          isOpen={isClicked("roles-and-operators")}
           icon={<SafetyOutlined />}
           label="Roles y Operadores"
-          onClick={() => setActive("roles-and-operators")}
-          className={
-            active("roles-and-operators") ? "menu-item active" : "menu-item"
-          }
+          onClick={() => handleClickOnMenuItem("roles-and-operators")}
+          className={getMenuItemClassName("roles-and-operators")}
         />
         <MenuItem
           label="Usuarios"
           icon={<UserOutlined />}
-          onClick={() => setActive("users")}
-          className={active("users") ? "menu-item active" : "menu-item"}
+          onClick={() => handleClickOnMenuItem("users")}
+          className={getMenuItemClassName("users")}
         />
         <MenuItem
           label="Identity"
           icon={<IdcardOutlined />}
-          onClick={() => setActive("identity")}
-          className={active("identity") ? "menu-item active" : "menu-item"}
+          onClick={() => handleClickOnMenuItem("identity")}
+          className={getMenuItemClassName("identity")}
         />
         <SubMenu
+          isOpen={isClicked("core-fintech")}
           icon={<BankOutlined />}
           label="Core Fintech"
-          className={active("core-fintech") ? "menu-item active" : "menu-item"}
-          onClick={() => setActive("core-fintech")}
+          className={getMenuItemClassName("core-fintech")}
+          onClick={() => handleClickOnMenuItem("core-fintech")}
         />
       </ul>
     </div>
   );
 }
 
-function SubMenu({ onClick, className, label, icon }) {
-  const [clicked, setClicked] = React.useState(false);
-  function myClick() {
-    onClick();
-    setClicked((a) => !a);
-  }
+function SubMenu({ onClick, className, label, icon, isOpen = false }) {
   return (
-    <div className={clicked ? "sub-menu open" : "sub-menu"}>
+    <div className={isOpen ? "sub-menu open" : "sub-menu"}>
       <li
-        onClick={myClick}
+        onClick={onClick}
         className={className}
         style={{
           display: "flex",
