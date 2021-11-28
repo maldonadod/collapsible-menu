@@ -71,13 +71,13 @@ function SubMenu({ onClick, className, label, icon }) {
       </li>
       <MenuItem
         label="Identity"
-        icon={<IdcardOutlined />}
+        icon={null}
         onClick={() => console.log(`setActive("identity")`)}
         className="menu-item"
       />
       <MenuItem
         label="Identity"
-        icon={<IdcardOutlined />}
+        icon={null}
         onClick={() => console.log(`setActive("identity")`)}
         className="menu-item"
       />

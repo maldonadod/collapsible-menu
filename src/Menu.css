@@ -8,6 +8,7 @@
   overflow: hidden;
   padding-top: 24px;
   cursor: pointer;
+  user-select: none;
 }
 .menu:hover {
   width: 256px;
