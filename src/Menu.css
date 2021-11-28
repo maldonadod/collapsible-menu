@@ -47,6 +47,9 @@
 .sub-menu.open {
   height: 132px;
 }
+.sub-menu .menu-item:not(:first-child) {
+  background: #f9f9f9;
+}
 .menu:hover .label-container {
   opacity: 1;
 }
