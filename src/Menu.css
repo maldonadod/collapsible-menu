@@ -38,7 +38,7 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-.menu-item .hidden {
+.menu-item.hidden {
   display: none;
 }
 .menu:hover .label-container {
