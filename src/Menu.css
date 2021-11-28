@@ -38,8 +38,14 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-.menu-item.hidden {
-  display: none;
+.sub-menu {
+  overflow: hidden;
+  height: 44px;
+  transition: height 0.3s;
+  transition-delay: 0.3s;
+}
+.sub-menu.open {
+  height: 132px;
 }
 .menu:hover .label-container {
   opacity: 1;

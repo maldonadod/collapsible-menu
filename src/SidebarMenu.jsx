@@ -51,7 +51,7 @@ function SubMenu({ onClick, className, label, icon }) {
     setClicked((a) => !a);
   }
   return (
-    <>
+    <div className={clicked ? "sub-menu open" : "sub-menu"}>
       <li
         onClick={myClick}
         className={className}
@@ -73,15 +73,15 @@ function SubMenu({ onClick, className, label, icon }) {
         label="Identity"
         icon={<IdcardOutlined />}
         onClick={() => console.log(`setActive("identity")`)}
-        className={clicked ? "menu-item" : "menu-item hidden"}
+        className="menu-item"
       />
       <MenuItem
         label="Identity"
         icon={<IdcardOutlined />}
         onClick={() => console.log(`setActive("identity")`)}
-        className={clicked ? "menu-item" : "menu-item hidden"}
+        className="menu-item"
       />
-    </>
+    </div>
   );
 }
 
