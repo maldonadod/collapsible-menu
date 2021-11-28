@@ -4,6 +4,7 @@ import {
   UserOutlined,
   IdcardOutlined,
   BankOutlined,
+  CreditCardOutlined,
 } from "@ant-design/icons";
 import "./Menu.css";
 
@@ -59,6 +60,73 @@ export default function SidebarMenu() {
       setClicked([]);
     }
   }, [collapsed]);
+
+  const menuItems = [
+    {
+      name: "roles-and-operators",
+      label: "Roles y Operadores",
+      icon: <SafetyOutlined />,
+      subitems: [
+        {
+          name: "roles",
+          label: "Roles",
+        },
+        {
+          name: "operators",
+          label: "Operadores",
+        },
+      ],
+    },
+    {
+      name: "users",
+      label: "Usuarios",
+      icon: <UserOutlined />,
+    },
+    {
+      name: "identity",
+      label: "Identity",
+      icon: <IdcardOutlined />,
+    },
+    {
+      name: "core-fintech",
+      label: "Core Fintech",
+      icon: <BankOutlined />,
+      subitems: [
+        {
+          name: "accounts",
+          label: "Cuentas",
+        },
+        {
+          name: "transactions",
+          label: "Transacciones",
+        },
+      ],
+    },
+    {
+      name: "cards",
+      label: "Tarjetas",
+      icon: <CreditCardOutlined />,
+      subitems: [
+        {
+          name: "cards-issued",
+          label: "Tarjetas emitidas",
+        },
+        {
+          name: "delivery",
+          label: "Delivery",
+        },
+        {
+          name: "card-batch",
+          label: "Envio de lotes",
+        },
+        {
+          name: "transactions",
+          label: "Transacciones",
+        },
+      ],
+    },
+  ];
+
   return (
     <div
       className="menu-container"
@@ -66,7 +134,30 @@ export default function SidebarMenu() {
       onMouseOver={onMouseOver}
     >
       <ul className="menu">
-        <SubMenu
+        {menuItems.map((menuItem) => {
+          if (menuItem.subitems && menuItem.subitems.length > 0) {
+            return (
+              <SubMenu
+                isOpen={isClicked(menuItem.name)}
+                icon={menuItem.icon}
+                label={menuItem.label}
+                subitems={menuItem.subitems}
+                onClick={() => handleClickOnMenuItem(menuItem.name)}
+                className={getMenuItemClassName(menuItem.name)}
+              />
+            );
+          } else {
+            return (
+              <MenuItem
+                label={menuItem.label}
+                icon={menuItem.icon}
+                onClick={() => handleClickOnMenuItem(menuItem.name)}
+                className={getMenuItemClassName(menuItem.name)}
+              />
+            );
+          }
+        })}
+        {/* <SubMenu
           isOpen={isClicked("roles-and-operators")}
           icon={<SafetyOutlined />}
           label="Roles y Operadores"
@@ -91,13 +182,20 @@ export default function SidebarMenu() {
           label="Core Fintech"
           className={getMenuItemClassName("core-fintech")}
           onClick={() => handleClickOnMenuItem("core-fintech")}
-        />
+        /> */}
       </ul>
     </div>
   );
 }
 
-function SubMenu({ onClick, className, label, icon, isOpen = false }) {
+function SubMenu({
+  onClick,
+  className,
+  label,
+  icon,
+  isOpen = false,
+  subitems = [],
+}) {
   return (
     <div className={isOpen ? "sub-menu open" : "sub-menu"}>
       <li
@@ -117,7 +215,17 @@ function SubMenu({ onClick, className, label, icon, isOpen = false }) {
           <span className="chevron bottom"></span>
         </div>
       </li>
-      <MenuItem
+      {subitems.map((subitem) => {
+        return (
+          <MenuItem
+            label={subitem.label}
+            icon={null}
+            onClick={() => console.log(`setActive("identity")`)}
+            className="menu-item"
+          />
+        );
+      })}
+      {/* <MenuItem
         label="Identity"
         icon={null}
         onClick={() => console.log(`setActive("identity")`)}
@@ -128,7 +236,7 @@ function SubMenu({ onClick, className, label, icon, isOpen = false }) {
         icon={null}
         onClick={() => console.log(`setActive("identity")`)}
         className="menu-item"
-      />
+      /> */}
     </div>
   );
 }
