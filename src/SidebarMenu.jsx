@@ -121,11 +121,11 @@ export default function SidebarMenu() {
   const getMenuItemClassName = (menuItemName) => {
     return active(menuItemName) ? "menu-item active" : "menu-item";
   };
-  React.useEffect(() => {
-    if (collapsed) {
-      setClicked([]);
-    }
-  }, [collapsed]);
+  // React.useEffect(() => {
+  //   if (collapsed) {
+  //     setClicked([]);
+  //   }
+  // }, [collapsed]);
 
   return (
     <div
@@ -141,7 +141,16 @@ export default function SidebarMenu() {
                 isOpen={isClicked(menuItem.name)}
                 icon={menuItem.icon}
                 label={menuItem.label}
-                subitems={menuItem.subitems}
+                subitems={menuItem.subitems.map((subitem) => {
+                  return (
+                    <MenuItem
+                      label={subitem.label}
+                      icon={null}
+                      onClick={() => handleClickOnMenuItem(subitem.name)}
+                      className={getMenuItemClassName(subitem.name)}
+                    />
+                  );
+                })}
                 onClick={() => handleClickOnMenuItem(menuItem.name)}
                 className={getMenuItemClassName(menuItem.name)}
               />
@@ -191,16 +200,7 @@ function SubMenu({
           <span className="chevron bottom"></span>
         </div>
       </li>
-      {subitems.map((subitem) => {
-        return (
-          <MenuItem
-            label={subitem.label}
-            icon={null}
-            onClick={() => console.log(`setActive("identity")`)}
-            className="menu-item"
-          />
-        );
-      })}
+      {subitems}
     </div>
   );
 }
