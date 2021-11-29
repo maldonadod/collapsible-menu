@@ -67,7 +67,7 @@ const menuItems = [
         label: "Envio de lotes",
       },
       {
-        name: "transactions",
+        name: "cards-transactions",
         label: "Transacciones",
       },
     ],
@@ -93,11 +93,35 @@ function useCollapsed() {
   };
 }
 
+const activeItemsEntries = {
+  roles: ["roles-and-operators", "roles"],
+  operators: ["roles-and-operators", "operators"],
+
+  accounts: ["core-fintech", "accounts"],
+  transactions: ["core-fintech", "transactions"],
+
+  accounts: ["core-fintech", "accounts"],
+  transactions: ["core-fintech", "transactions"],
+
+  "cards-issued": ["cards", "cards-issued"],
+  delivery: ["cards", "delivery"],
+  "card-batch": ["cards", "card-batch"],
+  "cards-transactions": ["cards", "transactions"],
+};
+
+function deduceIfItemNameIsActiveFromSelectedItem(activeItem, itemName) {
+  return activeItemsEntries[activeItem]
+    ? activeItemsEntries[activeItem].includes(itemName)
+    : activeItem === itemName;
+}
+
 export default function SidebarMenu() {
   const [clickedItems, setClicked] = React.useState([]);
   const [activeItem, setActiveState] = React.useState();
   const { collapsed, setIsMouseOverMenu } = useCollapsed();
-  const active = (itemName) => itemName === activeItem;
+  const active = (itemName) => {
+    return deduceIfItemNameIsActiveFromSelectedItem(activeItem, itemName);
+  };
   const onMouseLeave = () => setIsMouseOverMenu(false);
   const onMouseOver = () => setIsMouseOverMenu(true);
   const handleClickOnMenuItem = (menuItemName) => {
@@ -121,12 +145,6 @@ export default function SidebarMenu() {
   const getMenuItemClassName = (menuItemName) => {
     return active(menuItemName) ? "menu-item active" : "menu-item";
   };
-  // React.useEffect(() => {
-  //   if (collapsed) {
-  //     setClicked([]);
-  //   }
-  // }, [collapsed]);
-
   return (
     <div
       className="menu-container"
@@ -138,7 +156,7 @@ export default function SidebarMenu() {
           if (menuItem.subitems && menuItem.subitems.length > 0) {
             return (
               <SubMenu
-                isOpen={isClicked(menuItem.name)}
+                isOpen={!collapsed && isClicked(menuItem.name)}
                 icon={menuItem.icon}
                 label={menuItem.label}
                 subitems={menuItem.subitems.map((subitem) => {
@@ -180,9 +198,7 @@ function SubMenu({
   subitems = [],
 }) {
   return (
-    <div
-      className={isOpen ? `sub-menu open size-${subitems.length}` : "sub-menu"}
-    >
+    <div className={isOpen ? `sub-menu size-${subitems.length}` : "sub-menu"}>
       <li
         onClick={onClick}
         className={className}
