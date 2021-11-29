@@ -63,6 +63,7 @@
   right: 24px;
   top: 16px;
   font-size: 12px;
+  transition: opacity 0.3s 0.5s;
 }
 .menu:hover .chevron {
   opacity: 1;
