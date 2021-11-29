@@ -127,7 +127,6 @@ export default function SidebarMenu() {
   const onMouseLeave = () => setIsMouseOverMenu(false);
   const onMouseOver = () => setIsMouseOverMenu(true);
   const handleClickOnMenuItem = (menuItemName) => {
-    addClicked(menuItemName);
     !collapsed && setActiveState(menuItemName);
   };
   const addClicked = (menuItemName) => {
@@ -171,7 +170,7 @@ export default function SidebarMenu() {
                     />
                   );
                 })}
-                onClick={() => handleClickOnMenuItem(menuItem.name)}
+                onClick={() => addClicked(menuItem.name)}
                 className={getMenuItemClassName(menuItem.name)}
               />
             );
