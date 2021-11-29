@@ -44,8 +44,11 @@
   height: 44px;
   transition: height 0.3s;
 }
-.sub-menu.open {
+.sub-menu.size-2 {
   height: 132px;
+}
+.sub-menu.size-4 {
+  height: 176px;
 }
 .sub-menu .menu-item:not(:first-child) {
   background: #f9f9f9;

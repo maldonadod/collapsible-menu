@@ -171,7 +171,9 @@ function SubMenu({
   subitems = [],
 }) {
   return (
-    <div className={isOpen ? "sub-menu open" : "sub-menu"}>
+    <div
+      className={isOpen ? `sub-menu open size-${subitems.length}` : "sub-menu"}
+    >
       <li
         onClick={onClick}
         className={className}
